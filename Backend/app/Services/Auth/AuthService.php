@@ -89,7 +89,7 @@ class AuthService
     {
         try {
 
-            Auth::logout();
+            Auth::guard('web')->logout();
 
             $request->session()->invalidate();
 

@@ -74,12 +74,4 @@ npm install
 npm run dev
 ```
 
-## 14. Known Issues / Recommendations
-- **Issue**: Missing Global Error Boundary
-  - **Location**: `src/App.jsx`
-  - **Impact**: Unhandled UI exceptions could crash the entire React tree rendering a white screen.
-  - **Suggested Improvement**: Implement a generic React ErrorBoundary component to catch and display graceful fallback UI during fatal errors.
-- **Issue**: Pagination UI
-  - **Location**: `src/pages/Dashboard.jsx`
-  - **Impact**: The backend returns paginated data (max 15 items), but the frontend currently only renders the first page and lacks pagination controls.
-  - **Suggested Improvement**: Implement "Next / Previous" buttons utilizing the backend pagination links.
+
