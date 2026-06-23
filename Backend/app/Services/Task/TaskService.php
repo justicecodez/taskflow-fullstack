@@ -29,7 +29,7 @@ class TaskService
                 fn($q) => $q->where('priority', $filter['priority'])
             );
 
-            $data = $query->paginate(2);
+            $data = $query->paginate(15);
             return ApiResponse::success(
                 data: TaskResource::collection($data),
                 message: 'Success',
