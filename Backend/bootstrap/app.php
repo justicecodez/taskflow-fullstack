@@ -105,24 +105,22 @@ return Application::configure(basePath: dirname(__DIR__))
             );
         });
 
-
-
         /*
         Anything else
         */
-        $exceptions->render(function (
-            Throwable $e,
-            Request $request
-        ) {
-
-
+        $exceptions->render(function (Throwable $e, Request $request) {
             report($e);
 
+            //HTTP-specific exceptions
+            if ($e instanceof \Symfony\Component\HttpKernel\Exception\HttpExceptionInterface) {
+                return ApiResponse::error(
+                    config('app.debug') ? $e->getMessage() : 'Internal server error',
+                    $e->getStatusCode()
+                );
+            }
 
             return ApiResponse::error(
-                config('app.debug')
-                    ? $e->getMessage()
-                    : 'Internal server error',
+                config('app.debug') ? $e->getMessage() : 'Internal server error',
                 500
             );
         });
