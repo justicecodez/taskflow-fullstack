@@ -17,12 +17,16 @@ export const Login = () => {
     e.preventDefault();
     setError('');
     setIsLoading(true);
-    
+
+    console.log('API_URL:', import.meta.env.VITE_API_URL);
+
     try {
       await login({ email, password });
       navigate('/dashboard');
     } catch (err) {
-      setError(err.response?.data?.message || 'Failed to login. Please check your credentials.');
+      console.error('Error:', err.message);
+      console.error('Response:', err.response?.data);
+      setError(err.response?.data?.message || err.message || 'Login failed');
     } finally {
       setIsLoading(false);
     }
@@ -53,7 +57,7 @@ export const Login = () => {
                 {error}
               </div>
             )}
-            
+
             <Input
               label="Email address"
               type="email"
